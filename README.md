@@ -1,4 +1,4 @@
-# 🔐 Pin Extractor
+# Pin Extractor
 
 > Extract secret numeric PIN codes from structured poems using positional word analysis.
 
