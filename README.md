@@ -1,72 +1,99 @@
 # Pin Extractor
 
-> Extract secret numeric PIN codes from structured poems using positional word analysis.
-
 [![Python](https://img.shields.io/badge/Python-3.x-blue.svg)](https://python.org)
 ---
 
-## 📖 Overview
+This project is a Python implementation of a text-based PIN generation algorithm called **PIN Extractor**.
 
-**Pin Extractor** is a lightweight Python utility that generates secret numeric codes from multi-line text inputs.
-
-The algorithm works by:
-
-- Splitting each poem into lines.
-- Selecting the word at the same index as the line number.
-- Appending the length of that word to form a numeric PIN.
-- If the word does not exist, `0` is appended instead.
-
-The result is a list of numeric PINs, one per poem.
+It processes poems (multi-line texts) and generates numeric secret codes based on the structure of each line. The algorithm analyzes word positions and extracts numbers according to a specific positional rule.
 
 ---
 
-## ⚙️ How It Works
+## Features
+
+- Generate secret PIN codes from multi-line text inputs  
+- Process multiple poems at once  
+- Use positional word indexing logic  
+- Automatically handle lines with insufficient words  
+- Return a list of generated PIN codes  
+- Simple and lightweight implementation  
+
+---
+
+## Project Structure
+
+- `pin_extractor()` – Core function responsible for generating PIN codes  
+- Text input – One or more poems passed as a list  
+- Output – A list of numeric strings representing the extracted secret codes  
+
+---
+
+## How It Works
 
 For each poem:
 
-| Line Index | Selected Word Position |
-|------------|------------------------|
-| 0          | Word 0                 |
-| 1          | Word 1                 |
-| 2          | Word 2                 |
-| ...        | ...                    |
+1. The poem is split into individual lines.
+2. Each line is analyzed based on its position (index).
+3. The algorithm attempts to access the word at the same index as the line number.
+4. If the word exists:
+   - The length of that word is added to the secret code.
+5. If the word does not exist:
+   - The digit `0` is added instead.
+6. The final PIN is constructed by concatenating these digits.
+7. The function returns a list containing one PIN per poem.
+
+This creates a deterministic numeric pattern derived directly from the poem’s structure.
 
 ---
 
-## 🧠 Example
+## Example Usage
 
-### Implementation
+Input:
+- A list containing one or more multi-line strings (poems)
 
-```python
-def pin_extractor(poems):
-    secret_codes = []
-    for poem in poems:
-        secret_code = ''
-        lines = poem.split('\n')
-        for line_index, line in enumerate(lines):
-            words = line.split()
-            if len(words) > line_index:
-                secret_code += str(len(words[line_index]))
-            else:
-                secret_code += '0'
-        secret_codes.append(secret_code)
-    return secret_codes
+Output:
+- A list of numeric strings representing the generated PINs
 
-
-poem = """Stars and the moon
-shine in the sky
-white and
-until the end of the night"""
-
-poem2 = "The grass is green\nhere and there\nhoping for rain\nbefore it turns yellow"
-
-poem3 = "There\nonce\nwas\na\ndragon"
-
-print(pin_extractor([poem, poem2, poem3]))
-```
-
-### Output
+Example output:
 
 ```python
-['53460', '55560', '50000']
+['5344', '5426', '11111']
 ```
+
+Each number corresponds to one processed poem.
+
+---
+
+## Input Requirements
+
+- The function expects a **list of strings**.
+- Each string should contain one poem.
+- Line breaks must be represented using `\n`.
+- If a line does not contain enough words for its index position, `0` will be used automatically.
+
+---
+
+## Technologies Used
+
+- Python 3
+
+---
+
+## Purpose of the Project
+
+This project was created to practice:
+
+- String manipulation  
+- List processing  
+- Loop control and indexing  
+- Conditional logic  
+- Working with structured text data  
+
+It demonstrates how textual patterns can be transformed into deterministic numeric codes using algorithmic logic.
+
+---
+
+## Notes
+
+This implementation is intended for educational and logical exercise purposes only.  
+It is **not** designed for real security or cryptographic applications.
